@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+    <title>Rafik's Lab</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+    <ul class="navbar-nav">
+        <li class="nav-item active">
+            <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="mailto:kouissar@gmail.com">Contact me</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+    </ul>
+</nav>
+
+
+<div class="jumbotron text-center">
+    <h1>Welcome to Rafik's Lab</h1>
+    <p>A place for new ideas and state of the art technology!</p>
+    {% block content %}{% endblock %}
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">It's a broader card with text below as a natural lead-in to extra content. This
+                        content is a little longer.</p>
+                    <a href="/enternew" class="btn btn-primary">Quran Tools</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">It's a broader card with text below as a natural lead-in to extra content. This
+                        content is a little longer.</p>
+                    <a href="/" class="btn btn-primary">Go Home</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">It's a broader card with text below as a natural lead-in to extra content. This
+                        content is a little longer.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+</div>
+
+<p>&copy; 2020 Incredible Lab</p>
+</body>
+</html>
