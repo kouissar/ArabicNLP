@@ -8,16 +8,13 @@ app = Flask(__name__)
 
 
 
-
 @app.route('/')
 def home():
-    # h = ArabicHelp(4,6)
-    # full_verse= h.getVerse()
     return render_template('home.html')
 
 
 @app.route('/enternew')
-def new_student():
+def new_search():
     return render_template('search_verse_form.html')
 
 @app.route('/tokenize')
@@ -27,11 +24,11 @@ def new_token():
 @app.route('/addtok', methods=['POST', 'GET'])
 def addtok():
     if request.method == 'POST':
-        toc_txt = request.form['txt']
+        tok_txt = request.form['txt']
         h = Arabic_helper()
-        result = h.tokenize(toc_txt)
+        result = h.tokenize(tok_txt)
         print(result)
-        return render_template("response_token.html", result=result)
+        return render_template("response_token.html", result=result, orig_txt=tok_txt)
 
         #     full_verse = h.getVerse()
         #     print("values are ", sourah, verse, full_verse)
@@ -57,33 +54,56 @@ def addrec():
     if request.method == 'POST':
         sourah = request.form['sourah']
         verse = request.form['verse']
-        save = request.form['bookmark_me']
+        save= request.form['bookmark_me']
         # txt = request.form['txt']
         # pin = request.form['pin']
 
         h = Arabic_helper()
         full_verse = h.getVerse(sourah, verse)
-        print("values are ", sourah, verse, full_verse)
-        if save:
+        print("values are ", save, sourah, verse, full_verse)
 
-            try:
+        return render_template("result.html",  s=sourah, v=verse, fv=full_verse)
 
-                with sql.connect("database.db") as con:
-                    cur = con.cursor()
+@app.route('/save')
+def save():
+    sourah= request.args.get('s')
+    verse = request.args.get('v')
+    full_verse = request.args.get('fv')
 
-                    cur.execute("INSERT INTO verses (sourah,verse,txt) VALUES(?, ?, ?)",(sourah,verse,full_verse) )
+    print('data is ', sourah,verse, full_verse)
+    try:
+        with sql.connect("database.db") as con:
+            cur = con.cursor()
 
-                    con.commit()
-                    msg = "Record successfully added"
-            except sql.DatabaseError as err:
-                con.rollback()
-                msg = "error in insert operation " + err
+            cur.execute("INSERT INTO verses (sourah,verse,txt) VALUES(?, ?, ?)", (sourah, verse, full_verse))
 
-            finally:
-                return render_template("result.html", msg=msg, fv=full_verse)
-                con.close()
-        else:
-            return render_template("result.html",  fv=full_verse)
+            con.commit()
+            msg = "Record successfully added"
+    except sql.DatabaseError as err:
+        con.rollback()
+        msg = "error in insert operation " + err
+
+    finally:
+        return render_template("result.html", msg=msg)
+        con.close()
+
+@app.route('/delete')
+def delete():
+    try:
+        with sql.connect("database.db") as con:
+            cur = con.cursor()
+
+            cur.execute("DELETE FROM verses")
+
+            con.commit()
+            msg = "Record successfully deleted"
+    except sql.DatabaseError as err:
+        con.rollback()
+        msg = "error in insert operation " + err
+
+    finally:
+        return render_template("result.html", msg=msg)
+        con.close()
 
 
 @app.route('/list')
