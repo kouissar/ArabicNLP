@@ -30,4 +30,7 @@ link = ara.get_random_verse(aya)
 # print(result3)
 
 
-full_verse = ara.getVerse(1,2)
+# full_verse = ara.getVerse(1,2)
+
+count=ara.word_count("ذهب الطالب الى المدرسة")
+print(count)

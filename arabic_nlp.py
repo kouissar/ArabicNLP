@@ -2,7 +2,7 @@ import pyarabic.araby as araby
 import pyarabic.number as number
 import random
 import requests
-
+import nltk
 
 class Arabic_helper:
 
@@ -67,3 +67,16 @@ class Arabic_helper:
         # print(verse_a)
         return verse_a
        # print(verse_e)
+
+    def word_count(self, str):
+       words=str.split(" ")
+       count = len(words)
+       return count
+
+    def freq_dist(self, str):
+        words = araby.tokenize(str)
+        # print(words)
+        freq = nltk.FreqDist(words)
+        for key, val in freq.items():
+            print(str(key) + ':' + str(val))
+        return str(key) + ':' + str(val)

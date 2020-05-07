@@ -27,8 +27,10 @@ def addtok():
         tok_txt = request.form['txt']
         h = Arabic_helper()
         result = h.tokenize(tok_txt)
+        count= h.word_count(tok_txt)
+        # freq = h.freq_dist(tok_txt)
         print(result)
-        return render_template("response_token.html", result=result, orig_txt=tok_txt)
+        return render_template("response_token.html", result=result, orig_txt=tok_txt, c=count)
 
         #     full_verse = h.getVerse()
         #     print("values are ", sourah, verse, full_verse)
@@ -54,7 +56,6 @@ def addrec():
     if request.method == 'POST':
         sourah = request.form['sourah']
         verse = request.form['verse']
-        save= request.form['bookmark_me']
         # txt = request.form['txt']
         # pin = request.form['pin']
 
@@ -64,28 +65,29 @@ def addrec():
 
         return render_template("result.html",  s=sourah, v=verse, fv=full_verse)
 
-@app.route('/save')
+@app.route('/save', methods=['POST', 'GET'])
 def save():
-    sourah= request.args.get('s')
-    verse = request.args.get('v')
-    full_verse = request.args.get('fv')
+    if request.method == 'POST':
+        sourah= request.form['sourah']
+        verse = request.form['verse']
+        full_verse = request.form['full_verse']
 
-    print('data is ', sourah,verse, full_verse)
-    try:
-        with sql.connect("database.db") as con:
-            cur = con.cursor()
+        print('data is ', sourah, verse, full_verse)
+        try:
+            with sql.connect("database.db") as con:
+                cur = con.cursor()
 
-            cur.execute("INSERT INTO verses (sourah,verse,txt) VALUES(?, ?, ?)", (sourah, verse, full_verse))
+                cur.execute("INSERT INTO verses (sourah,verse,txt) VALUES(?, ?, ?)", (sourah, verse, full_verse))
 
-            con.commit()
-            msg = "Record successfully added"
-    except sql.DatabaseError as err:
-        con.rollback()
-        msg = "error in insert operation " + err
+                con.commit()
+                msg = "Record successfully added"
+        except sql.DatabaseError as err:
+            con.rollback()
+            msg = "error in insert operation " + err
 
-    finally:
-        return render_template("result.html", msg=msg)
-        con.close()
+        finally:
+            return render_template("result.html", msg=msg)
+            con.close()
 
 @app.route('/delete')
 def delete():
