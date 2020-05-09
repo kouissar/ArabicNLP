@@ -8,55 +8,54 @@
 <div class="row">
     <div class="col-sm-2">
         <div class="c-callout c-callout-info b-t-1 b-r-1 b-b-1">
-            <small class="text-muted">Word Count</small><br>
-            <strong class="h4">{{c}}</strong>
+            <small class="text-muted">Sura</small><br>
+            <strong class="h4">{{r[2]}}</strong>
         </div>
     </div><!--/.col-->
     <div class="col-sm-2">
         <div class="c-callout c-callout-danger b-t-1 b-r-1 b-b-1">
-            <small class="text-muted">Letter Count</small><br>
-            <strong class="h4">{{l}}</strong>
+            <small class="text-muted">English</small><br>
+            <strong class="h4">{{r[3]}}</strong>
         </div>
     </div><!--/.col-->
     <div class="col-sm-2">
         <div class="c-callout c-callout-warning b-t-1 b-r-1 b-b-1">
-            <small class="text-muted">Named Entities</small><br>
-            <strong class="h4">{{nc}}</strong>
+            <small class="text-muted">number</small><br>
+            <strong class="h4">{{r[4]}}</strong>
         </div>
     </div><!--/.col-->
     <div class="col-sm-2">
         <div class="c-callout c-callout-success b-t-1 b-r-1 b-b-1">
-            <small class="text-muted">Organic</small><br>
-            <strong class="h4">49,123</strong>
+            <small class="text-muted">Number in Sura</small><br>
+            <strong class="h4">{{r[5]}}</strong>
         </div>
     </div><!--/.col-->
     <div class="col-sm-2">
         <div class="c-callout b-t-1 b-r-1 b-b-1">
-            <small class="text-muted">Confidence</small><br>
-            <strong class="h4">23%</strong>
+            <small class="text-muted">Revelation type</small><br>
+            <strong class="h4">{{r[6]}}</strong>
         </div>
     </div><!--/.col-->
     <div class="col-sm-2">
         <div class="c-callout c-callout-primary b-t-1 b-r-1 b-b-1">
-            <small class="text-muted">Bounce Rate</small><br>
-            <strong class="h4">5%</strong>
+            <small class="text-muted">Page</small><br>
+            <strong class="h4">{{r[7]}}</strong>
         </div>
     </div><!--/.col-->
 </div><!--/.row-->
 
 <div class="container">
-    <h4>Tokenize Text Engine</h4>
-    <p>The following tool will use nlp nltk to parse submitted text into tokens</p>
+<!--    <h4>TBD</h4>-->
+<!--    <p>tbd</p>-->
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Original</th>
-            <!--        <th>Email</th>-->
+            <th>Arabic</th>
         </tr>
         </thead>
         <tbody>
         <tr class="success" align="right">
-            <td>{{orig_txt}}</td>
+            <td><strong class="h4">{{r[0]}}</strong></td>
             <!--        <td>john@example.com</td>-->
         </tr>
     </table>
@@ -66,42 +65,42 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Result</th>
+            <th>English</th>
             <!--        <th>Email</th>-->
         </tr>
         </thead>
         <tbody>
         <tr class="success" align="right">
-            <td>{{result}}</td>
+            <td>{{r[1]}}</td>
             <!--        <td>john@example.com</td>-->
         </tr>
     </table>
 </div>
-<div class="container">
-    <h4>Names Entities</h4>
-    <p>Arabic Named enteties recognation pyarabic.named</p>
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Result</th>
-            <!--        <th>Email</th>-->
-        </tr>
-        </thead>
-        <tbody>
-        <tr class="success" align="right">
-            <td>{{n}}</td>
-            <!--        <td>john@example.com</td>-->
-        </tr>
+<!--<div class="container">-->
+<!--&lt;!&ndash;    <h4>Names Entities</h4>&ndash;&gt;-->
+<!--&lt;!&ndash;    <p>Arabic Named enteties recognation pyarabic.named</p>&ndash;&gt;-->
+<!--    <table class="table table-striped">-->
+<!--        <thead>-->
+<!--        <tr>-->
+<!--            <th>Sura</th>-->
+<!--            &lt;!&ndash;        <th>Email</th>&ndash;&gt;-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr class="success" align="right">-->
+<!--            <td>{{r[2]}}</td>-->
+<!--            &lt;!&ndash;        <td>john@example.com</td>&ndash;&gt;-->
+<!--        </tr>-->
 
-        </tbody>
-    </table>
-</div>
+<!--        </tbody>-->
+<!--    </table>-->
+<!--</div>-->
 
 
 <div class="container">
     {{f}}
 </div>
 <div class="container">
-    <h5><a href="\tokenize">New Submission</a></h5>
+    <h5><a href="\random">New Submission</a></h5>
 </div>
 {% endblock %}

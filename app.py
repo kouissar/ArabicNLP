@@ -3,6 +3,7 @@ from flask import Flask, render_template, request
 import sqlite3 as sql
 # from helper import ArabicHelp
 from arabic_nlp import Arabic_helper
+import random
 
 app = Flask(__name__)
 
@@ -28,9 +29,11 @@ def addtok():
         h = Arabic_helper()
         result = h.tokenize(tok_txt)
         count= h.word_count(tok_txt)
+        names= h.get_name(tok_txt)
+        names_count= len(names)
+        lcount=h.get_letter_count(tok_txt)
         # freq = h.freq_dist(tok_txt)
-        print(result)
-        return render_template("response_token.html", result=result, orig_txt=tok_txt, c=count)
+        return render_template("response_token.html", result=result, orig_txt=tok_txt, c=count, n=names, l=lcount, nc=names_count)
 
         #     full_verse = h.getVerse()
         #     print("values are ", sourah, verse, full_verse)
@@ -64,6 +67,13 @@ def addrec():
         print("values are ", save, sourah, verse, full_verse)
 
         return render_template("result.html",  s=sourah, v=verse, fv=full_verse)
+
+@app.route('/random')
+def random_verse():
+    aya = random.randint(1, 6237)
+    h = Arabic_helper()
+    ran=h.get_random_verse(aya)
+    return render_template("random.html", r=ran)
 
 @app.route('/save', methods=['POST', 'GET'])
 def save():

@@ -6,7 +6,9 @@
 </div>
 
 <div class="container">
-    <h2>Verse Finder</h2>
+    <h2>Search Quran</h2>
+        <p>locate a Quran verse by Chapter and verse numbers</p>
+
     <form class="form-horizontal" action="{{ url_for('addrec') }}" method="POST">
         <div class="form-group">
             <label class="control-label col-sm-2" for="sourah">Sourah:</label>
@@ -30,5 +32,9 @@
             </div>
         </div>
     </form>
+</div>
+<div class="col-sm-10">
+    <h6><a href="\list">Show Bookmarks</a></h6>
+    <h6><a href="\delete">Clear Bookmarks</a></h6>
 </div>
 {% endblock %}

@@ -1,5 +1,6 @@
 import random
 
+
 from arabic_nlp import Arabic_helper
 
 
@@ -21,7 +22,7 @@ result2= ara.count_word_occurence(u'لا إن شعر المتنبي جيد جو�
 aya = random.randint(1,6237)
 # print(aya)
 link = ara.get_random_verse(aya)
-# print(link[0])
+print(link[0])
 # print(link[1])
 # print(link[2])
 
@@ -32,5 +33,8 @@ link = ara.get_random_verse(aya)
 
 # full_verse = ara.getVerse(1,2)
 
-count=ara.word_count("ذهب الطالب الى المدرسة")
-print(count)
+# count=ara.word_count("ذهب الطالب الى المدرسة")
+# print(count)
+#
+# name = ara.get_name("ذَٰلِكَ عِيسَى ابْنُ مَرْيَمَ ۚ قَوْلَ الْحَقِّ الَّذِي فِيهِ يَمْتَرُونَ")
+# print(name)

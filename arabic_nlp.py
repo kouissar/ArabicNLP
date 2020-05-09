@@ -1,8 +1,12 @@
+import string
+
 import pyarabic.araby as araby
 import pyarabic.number as number
 import random
 import requests
 import nltk
+import pyarabic.named as named
+
 
 class Arabic_helper:
 
@@ -46,15 +50,22 @@ class Arabic_helper:
 
     def get_random_verse(self, verse):
         url = 'http://api.alquran.cloud/ayah/' + str(verse) + '/editions/quran-uthmani,en.pickthall'
-        print(url)
+        #print(url)
         json_data = requests.get(url).json()
-        # print(json_data)
+        print(json_data)
         verse_a = json_data['data'][0]['text']
         verse_en = json_data['data'][1]['text']
-        sura = json_data['data'][0]['surah']['englishName'] + \
-               '(' + str(json_data['data'][0]['surah']['number']) + '):' + \
-               str(json_data['data'][0]['numberInSurah'])
-        return [verse_a, verse_en, sura]
+        sura = json_data['data'][0]['surah']['name']
+        sura_en = json_data['data'][0]['surah']['englishName']
+        number = json_data['data'][0]['surah']['number']
+        number_in_sura=json_data['data'][0]['numberInSurah']
+        page=json_data['data'][0]['page']
+
+        # sura = json_data['data'][0]['surah']['englishName'] + \
+        #        '(' + str(json_data['data'][0]['surah']['number']) + '):' + \
+        #        str(json_data['data'][0]['numberInSurah'])
+        type= json_data['data'][0]['surah']['revelationType']
+        return [verse_a, verse_en, sura, sura_en, number, number_in_sura, type, page]
 
     def get_verse(self, surah, verse):
         url = 'http://api.alquran.cloud/v1/ayah/' + str(surah) + ':' + str(verse)
@@ -80,3 +91,11 @@ class Arabic_helper:
         for key, val in freq.items():
             print(str(key) + ':' + str(val))
         return str(key) + ':' + str(val)
+
+    def get_name(self, str):
+        names=named.extract_named(str)
+        return names
+
+    def get_letter_count(self, str):
+        lcount= len(str)
+        return lcount
