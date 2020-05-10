@@ -1,9 +1,14 @@
+from _curses import flash
+
 import requests
-from flask import Flask, render_template, request
+from flask import Flask, Response, redirect, url_for, session, abort, render_template, request
+from flask_login import LoginManager, UserMixin,  login_required, login_user, logout_user, current_user
 import sqlite3 as sql
 # from helper import ArabicHelp
 from arabic_nlp import Arabic_helper
 import random
+import os
+
 
 app = Flask(__name__)
 
@@ -11,7 +16,34 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    if not session.get('logged_in'):
+        return render_template('login.html')
+    else:
+        return render_template('home.html')
+
+@app.route('/login', methods=['POST'])
+def do_admin_login():
+    if request.form['password'] == 'password' and request.form['username'] == 'admin@google.com':
+        session['logged_in'] = True
+    else:
+        flash('wrong password!')
+    return home()
+
+@app.route("/logout")
+def logout():
+    session['logged_in'] = False
+    return home()
+
+#
+# @app.route('/')
+# @login_required
+# def home():
+#     return render_template('home.html', name=current_user.name)
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
 
 
 @app.route('/enternew')
@@ -35,23 +67,6 @@ def addtok():
         # freq = h.freq_dist(tok_txt)
         return render_template("response_token.html", result=result, orig_txt=tok_txt, c=count, n=names, l=lcount, nc=names_count)
 
-        #     full_verse = h.getVerse()
-        #     print("values are ", sourah, verse, full_verse)
-        #     with sql.connect("database.db") as con:
-        #         cur = con.cursor()
-        #
-        #         cur.execute("INSERT INTO verses (sourah,verse,txt) VALUES(?, ?, ?)",(sourah,verse,full_verse) )
-        #
-        #         con.commit()
-        #         msg = "Record successfully added"
-        # except sql.DatabaseError as err:
-        #     con.rollback()
-        #     msg = "error in insert operation " + err
-        #
-        # finally:
-        #     return render_template("result.html", msg=msg)
-        #     con.close()
-
 
 
 @app.route('/addrec', methods=['POST', 'GET'])
@@ -69,6 +84,7 @@ def addrec():
         return render_template("result.html",  s=sourah, v=verse, fv=full_verse)
 
 @app.route('/random')
+# @login_required
 def random_verse():
     aya = random.randint(1, 6237)
     h = Arabic_helper()
@@ -130,5 +146,8 @@ def list():
     return render_template("list.html", rows=rows)
 
 
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.secret_key = os.urandom(12)
+    app.run(port=5000, debug=True)
