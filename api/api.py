@@ -21,7 +21,7 @@ def home():
 
 @app.route('/api/v1/resources/emp/all', methods=['GET'])
 def api_all():
-    conn = sqlite3.connect('employee.db')
+    conn = sqlite3.connect('../db/employee.db')
     conn.row_factory = dict_factory
     cur = conn.cursor()
     all_employees = cur.execute('SELECT * FROM emp;').fetchall()
