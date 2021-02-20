@@ -1,11 +1,11 @@
 import string
-
 import pyarabic.araby as araby
 import pyarabic.number as number
 import random
 import requests
 import nltk
 import pyarabic.named as named
+import json
 
 
 class Arabic_helper:
@@ -99,3 +99,13 @@ class Arabic_helper:
     def get_letter_count(self, str):
         lcount= len(str)
         return lcount
+
+    def predict(self, str):
+        url = "http://mazajak.inf.ed.ac.uk:8000/api/predict"
+        to_sent = {'data': str}
+        data = json.dumps(to_sent)
+        headers = {'content-type': 'application/json'}
+        # sending get request and saving the response as response object
+        response = requests.post(url=url, data=data, headers=headers)
+        prediction = json.loads(response.content)['data']
+        return prediction

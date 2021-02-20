@@ -24,24 +24,24 @@
             <strong class="h4">{{nc}}</strong>
         </div>
     </div><!--/.col-->
-    <div class="col-sm-2">
+   <!-- <div class="col-sm-2">
         <div class="c-callout c-callout-success b-t-1 b-r-1 b-b-1">
             <small class="text-muted">Organic</small><br>
             <strong class="h4">49,123</strong>
         </div>
-    </div><!--/.col-->
+    </div>/.col-->
     <div class="col-sm-2">
         <div class="c-callout b-t-1 b-r-1 b-b-1">
-            <small class="text-muted">Confidence</small><br>
-            <strong class="h4">23%</strong>
+            <small class="text-muted">Sentiment Analysis</small><br>
+            <strong class="h4">{{s}}</strong>
         </div>
     </div><!--/.col-->
-    <div class="col-sm-2">
+    <!--<div class="col-sm-2">
         <div class="c-callout c-callout-primary b-t-1 b-r-1 b-b-1">
             <small class="text-muted">Bounce Rate</small><br>
             <strong class="h4">5%</strong>
         </div>
-    </div><!--/.col-->
+    </div>&lt;!&ndash;/.col&ndash;&gt;-->
 </div><!--/.row-->
 
 <div class="container">
@@ -97,6 +97,25 @@
     </table>
 </div>
 
+<div class="container">
+    <h4>Sentiment Analysis</h4>
+    <p>Here is our analysis for sentiment expressed in text: Positive/Negative/Neutral</p>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Result</th>
+            <!--        <th>Email</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="success" align="right">
+            <td>{{s}}</td>
+            <!--        <td>john@example.com</td>-->
+        </tr>
+
+        </tbody>
+    </table>
+</div>
 
 <div class="container">
     {{f}}
@@ -104,4 +123,10 @@
 <div class="container">
     <h5><a href="\tokenize">New Submission</a></h5>
 </div>
+
+
+
+Sentiment Analysis is courtesy of Mazajak: An Online Arabic Sentiment Analyser
 {% endblock %}
+
+

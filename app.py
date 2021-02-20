@@ -64,8 +64,9 @@ def addtok():
         names= h.get_name(tok_txt)
         names_count= len(names)
         lcount=h.get_letter_count(tok_txt)
+        sentiment=h.predict(tok_txt)
         # freq = h.freq_dist(tok_txt)
-        return render_template("response_token.html", result=result, orig_txt=tok_txt, c=count, n=names, l=lcount, nc=names_count)
+        return render_template("response_token.html", result=result, orig_txt=tok_txt, c=count, n=names, l=lcount, nc=names_count, s=sentiment)
 
 
 
